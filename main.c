@@ -45,6 +45,7 @@ int main(int argc, char *argv[]) {
 			case 'o':
 				one_shot = 1;
 				break;
+			case 'c':
 			case 'q':
 				quit_on_keypress = 1;
 				break;
@@ -82,7 +83,10 @@ int main(int argc, char *argv[]) {
 		XEvent e;
 		XNextEvent(display, &e);
 		XImage *image = XGetImage(display, root, 0, 0, gwa.width, gwa.height, AllPlanes, ZPixmap);
-		if (e.type == ButtonPress && e.xbutton.button == Button1) {
+		//printf("%d",e.xbutton.button);
+		if ((e.type == ButtonPress && e.xbutton.button == Button1) ||
+				(e.type == 2 && e.xbutton.button == 196) ||
+				(e.type == 2 && e.xbutton.button == 193)) {
 				unsigned long pixel = XGetPixel(image, e.xbutton.x_root, e.xbutton.y_root);
 				if (output_format & 0x1) {
 					printf("%d,%d,%d ", (pixel >> 0x10) & 0xFF, (pixel >> 0x08) & 0xFF, pixel & 0xFF);
