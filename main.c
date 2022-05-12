@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 	int one_shot = 0;
 	int quit_on_keypress = 0;
 	int output_format = 0x11;
-	
+
 	static struct option long_options[] = {
 		{"one-shot", no_argument, NULL, 'o'},
 		{"quit-on-keypress", no_argument, NULL, 'q'},
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
 		{"rgb", no_argument, NULL, 'r'},
 		{"hex", no_argument, NULL, 'd'}
 	};
-	
+
 	while ((opt = getopt_long(argc, argv, "oqhrd", long_options, NULL)) != -1) {
 		switch(opt) {
 			case 'o':
@@ -86,6 +86,7 @@ int main(int argc, char *argv[]) {
 		//printf("%d",e.xbutton.button);
 		if ((e.type == ButtonPress && e.xbutton.button == Button1) ||
 				(e.type == 2 && e.xbutton.button == 196) ||
+				(e.type == 2 && e.xbutton.button == 225) ||
 				(e.type == 2 && e.xbutton.button == 193)) {
 				unsigned long pixel = XGetPixel(image, e.xbutton.x_root, e.xbutton.y_root);
 				if (output_format & 0x1) {
